@@ -1,0 +1,29 @@
+name: C++ CI
+
+on:
+  push: {}
+  pull_request: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2.1.0
+
+    - name: Set up MSVC
+      uses: microsoft/setup-msbuild@v1.0.2
+
+    - name: Build C++ project
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+        cmake --build .
+      working-directory: ../../src/KPI_Lab1/KPI-Lab1.sln
+
+    - name: Run tests
+      run: |
+        ctest --output-on-failure
+      working-directory: ../../src/KPI_Lab1/KPI_Lab1_Test/test.cpp
