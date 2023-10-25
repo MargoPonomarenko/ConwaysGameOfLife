@@ -21,9 +21,9 @@ jobs:
         cd build
         cmake ..
         cmake --build .
-      working-directory: src/KPI_Lab1/KPI-Lab1.sln
+      working-directory: src\KPI_Lab1\KPI-Lab1.sln
 
     - name: Run tests
       run: |
         ctest --output-on-failure
-      working-directory: src/KPI_Lab1/KPI_Lab1_Test/test.cpp
+      working-directory: src\KPI_Lab1\KPI_Lab1_Test\test.cpp
