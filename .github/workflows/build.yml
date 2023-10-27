@@ -20,7 +20,7 @@ jobs:
 
       - name: Run MSBuild
         id: run_msbuild
-        working-directory: $
+        working-directory: .
         run: msbuild .\src\KPI_Lab1\KPI_Lab1.sln
 
       - name: Install and configure Google Test
