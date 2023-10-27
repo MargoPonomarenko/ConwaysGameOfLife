@@ -4,44 +4,42 @@ on:
   push: {}
   pull_request: {}
 
-
 jobs:
   run-msbuild-vstest:
-  runs-on: windows-latest
-  name: Run MSBuild and VSTest
-  
-  steps:
-	- name: Checkout code
-	  uses: actions/checkout@v2.1.0
-	  id: checkout_code
+    runs-on: windows-latest
+    name: Run MSBuild and VSTest
 
-	- name: Setup MSBuild and add to PATH
-	  uses: microsoft/setup-msbuild@v1.0.0
-	  id: setup_msbuild
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2.1.0
+        id: checkout_code
 
-	- name: Run MSBuild
-	  id: run_msbuild
-	  working-directory: $
-	  run: msbuild .\TheGame.sln
+      - name: Setup MSBuild and add to PATH
+        uses: microsoft/setup-msbuild@v1.0.0
+        id: setup_msbuild
 
-	- name: Install and configure Google Test
-	  run: |
-		choco install vcpkg -y
-		vcpkg install gtest
-		vcpkg integrate install
-	  shell: pwsh
+      - name: Run MSBuild
+        id: run_msbuild
+        working-directory: $
+        run: msbuild .\src\KPI_Lab1\KPI_Lab1.sln
 
+      - name: Install and configure Google Test
+        run: |
+          choco install vcpkg -y
+          vcpkg install gtest
+          vcpkg integrate install
+        shell: pwsh
 
-	- name: configure
-	  run: |
-		mkdir build
-		cd build
-		cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="/WX" ..
+      - name: configure
+        run: |
+          mkdir build
+          cd build
+          cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="/WX" ..
 
-	- name: make
-	  run: |
-		cd build
-		cmake --build . --config Release
+      - name: make
+        run: |
+          cd build
+          cmake --build . --config Release
 
-	- name: Run Test
-	  run: .\src\KPI_Lab1\KPI_Lab1_Test\test.exe
+      - name: Run Test
+        run: .\src\KPI_Lab1\KPI_Lab1_Test\test.exe
