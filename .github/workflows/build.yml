@@ -1,29 +1,47 @@
-name: C++ CI
+name: Build and Test
 
 on:
   push: {}
   pull_request: {}
 
+
 jobs:
-  build:
-    runs-on: windows-latest
+  run-msbuild-vstest:
+  runs-on: windows-latest
+  name: Run MSBuild and VSTest
+  
+  steps:
+	- name: Checkout code
+	  uses: actions/checkout@v2.1.0
+	  id: checkout_code
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2.1.0
+	- name: Setup MSBuild and add to PATH
+	  uses: microsoft/setup-msbuild@v1.0.0
+	  id: setup_msbuild
 
-    - name: Set up MSVC
-      uses: ilammy/msvc-dev-cmd@v1
+	- name: Run MSBuild
+	  id: run_msbuild
+	  working-directory: $
+	  run: msbuild .\TheGame.sln
 
-    - name: Build C++ project
-      run: |
-        mkdir build
-        cd build
-        cmake ..
-        cmake --build .
-      working-directory: src\KPI_Lab1\KPI-Lab1.sln
+	- name: Install and configure Google Test
+	  run: |
+		choco install vcpkg -y
+		vcpkg install gtest
+		vcpkg integrate install
+	  shell: pwsh
 
-    - name: Run tests
-      run: |
-        ctest --output-on-failure
-      working-directory: src\KPI_Lab1\KPI_Lab1_Test\test.cpp
+
+	- name: configure
+	  run: |
+		mkdir build
+		cd build
+		cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="/WX" ..
+
+	- name: make
+	  run: |
+		cd build
+		cmake --build . --config Release
+
+	- name: Run Test
+	  run: .\src\KPI_Lab1\KPI_Lab1_Test\test.exe
