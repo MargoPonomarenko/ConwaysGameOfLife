@@ -33,4 +33,4 @@ jobs:
 
       - name: Run tests
         working-directory: ${{ github.workspace }}
-        run: .\src\KPI_Lab1\KPI_Lab1_Test\test.cpp --gtest_fail_on_failure || exit 1
+        run: .\src\KPI_Lab1\Debug\KPI_Lab1_Test.exe --gtest_fail_on_failure || exit 1
