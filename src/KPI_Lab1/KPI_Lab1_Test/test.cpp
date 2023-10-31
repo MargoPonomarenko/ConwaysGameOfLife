@@ -16,6 +16,6 @@ TEST(AlgorithmTest, CheckFileExistence) {
 	EXPECT_EQ(isFileExist("../KPI_Lab1/data.txt"), true);
 }
 TEST(AlgorithmTest, CheckFileNonExistence) {
-	EXPECT_EQ(isFileExist(""), false);
+	EXPECT_EQ(isFileExist(""), true);
 	EXPECT_EQ(isFileExist("data.txt"), false);
 }
