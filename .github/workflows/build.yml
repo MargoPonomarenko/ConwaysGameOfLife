@@ -7,7 +7,7 @@ on:
 jobs:
   run-msbuild-vstest:
     runs-on: windows-latest
-    name: Run MSBuild and VSTest
+    name: Run MSBuild and Google Test
 
     steps:
       - name: Checkout code
