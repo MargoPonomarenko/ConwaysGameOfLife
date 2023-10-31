@@ -31,16 +31,7 @@ jobs:
           vcpkg integrate install
         shell: pwsh
 
-      - name: configure
-        run: |
-          mkdir build
-          cd build
-          cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="/WX" ..
-
-      - name: make
+      - name: Run tests
         run: |
           cd build
-          cmake --build . --config Release
-
-      - name: Run Test
-        run: .\src\KPI_Lab1\KPI_Lab1_Test\test.exe
+          ctest -C "$env:BUILD_TYPE" -VV
