@@ -2,8 +2,20 @@
 #include "../KPI_Lab1/KPI_Lab1.h"
 
 TEST(AlgorithmTest, CheckFileExistence) {
+	std::string dataFileAbsolutePath;
+	if (getenv("GITHUB_ACTIONS")) {
+		dataFileAbsolutePath = "../../../KPI_Lab1/data.txt";
+		std::cout << "Running in GitHub Actions." << std::endl;
+	}
+	else {
+		dataFileAbsolutePath = "../../../KPI_Lab1/KPI_Lab1/data.txt";
+		std::cout << "Running by local path." << std::endl;
+	}
+
+	EXPECT_EQ(isFileExist(dataFileAbsolutePath), true);
 	/*std::string dataFileAbsolutePath = "${{ github.workspace }}/src/KPI_Lab1/KPI_Lab1/data.txt";*/
-	EXPECT_EQ(isFileExist("${{ github.workspace }}\src\KPI_Lab1\KPI_Lab1\data.txt"), true);
+	/*EXPECT_EQ(isFileExist("${{ github.workspace }}\src\KPI_Lab1\KPI_Lab1\data.txt"), true);*/
+	/*EXPECT_EQ(isFileExist("../../../KPI_Lab1/KPI_Lab1/data.txt"), true);*/
 	/*EXPECT_EQ(isFileExist("../../KPI_Lab1/data.txt"), true);*/
 	/*EXPECT_EQ(isFileExist(dataFileAbsolutePath), true);*/
 }
