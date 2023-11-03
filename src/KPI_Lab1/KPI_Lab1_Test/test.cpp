@@ -28,7 +28,14 @@ TEST(AlgorithmTest, CheckFileNonExistence) {
 	EXPECT_EQ(isFileExist("data.txt"), false);
 }
 TEST(AlgorithmTest, CreateVectorFromFileData) {
-	std::string dataFileAbsolutePath = "${{ github.workspace }}\src\KPI_Lab1\KPI_Lab1\data.txt";
+	std::string dataFileAbsolutePath;
+	if (getenv("GITHUB_ACTIONS")) {
+		dataFileAbsolutePath = "src/KPI_Lab1/KPI_Lab1/data.txt";
+		std::cout << "Running in GitHub Actions." << std::endl;
+	}
+	else {
+		dataFileAbsolutePath = "../../../KPI_Lab1/KPI_Lab1/data.txt";
+	}
 	vector<int> initData = dataInitialization(dataFileAbsolutePath);
 	int actualLength = initData.size();
 
