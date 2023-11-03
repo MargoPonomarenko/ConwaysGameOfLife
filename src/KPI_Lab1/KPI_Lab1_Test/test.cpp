@@ -21,11 +21,6 @@ TEST(AlgorithmTest, CheckFileExistence) {
 	}
 
 	EXPECT_EQ(isFileExist(dataFileAbsolutePath), true);
-	/*std::string dataFileAbsolutePath = "${{ github.workspace }}/src/KPI_Lab1/KPI_Lab1/data.txt";*/
-	/*EXPECT_EQ(isFileExist("${{ github.workspace }}\src\KPI_Lab1\KPI_Lab1\data.txt"), true);*/
-	/*EXPECT_EQ(isFileExist("../../../KPI_Lab1/KPI_Lab1/data.txt"), true);*/
-	/*EXPECT_EQ(isFileExist("../../KPI_Lab1/data.txt"), true);*/
-	/*EXPECT_EQ(isFileExist(dataFileAbsolutePath), true);*/
 }
 
 TEST(AlgorithmTest, CheckFileNonExistence) {
@@ -35,7 +30,6 @@ TEST(AlgorithmTest, CheckFileNonExistence) {
 TEST(AlgorithmTest, CreateVectorFromFileData) {
 	std::string dataFileAbsolutePath = "${{ github.workspace }}\src\KPI_Lab1\KPI_Lab1\data.txt";
 	vector<int> initData = dataInitialization(dataFileAbsolutePath);
-	/*vector<int> initData = dataInitialization("../../KPI_Lab1/data.txt");*/
 	int actualLength = initData.size();
 
 	vector<int> expectedData{3, 8, 5};
