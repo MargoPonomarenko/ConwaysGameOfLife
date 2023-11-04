@@ -1,1 +1,8 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=12454290&assignment_repo_type=AssignmentRepo)
+
+#### Пономаренко Маргарита Альбертівна ІМ-11
+
+
+## Task demonstration
+- Налаштування GitHub Actions відбувалося у гілках [integrations](https://github.com/future-stardust/im-1x-lab-1-MargoPonomarenko/tree/integrations) та [integrations-2](https://github.com/future-stardust/im-1x-lab-1-MargoPonomarenko/tree/integrations-2)
+- [Pull Request](https://github.com/future-stardust/im-1x-lab-1-MargoPonomarenko/pull/2) з unit test, що успішно проходить в GitHub Actions
+- [Pull Request #2](https://github.com/future-stardust/im-1x-lab-1-MargoPonomarenko/pull/3) з unit test, що НЕ проходить в GitHub Actions
