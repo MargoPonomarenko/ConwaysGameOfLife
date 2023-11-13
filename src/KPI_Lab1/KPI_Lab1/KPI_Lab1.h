@@ -24,21 +24,47 @@ vector<int> dataInitialization(string fileName) {
     ifstream file(fileName);
 
     string dataString;
-    if (isFileExist(fileName)) {
-        int linesToRead = 2;
-        int counter = 0;
-        while (getline(file, dataString) && counter < linesToRead) {
-            for (auto x : dataString) {
-                if (x != ' ') {
-                    string separateNumber(1, x);
-                    initData.push_back(stoi(separateNumber));
-                    cout << "Separate number: " << separateNumber << "\n";
-                    counter++;
+    if (!isFileExist(fileName)) {
+        throw runtime_error("Errors occurred while opening a file  " + fileName);
+    }
+
+    int linesToRead = 2;
+    int counter = 0;
+    while (getline(file, dataString) && counter < linesToRead) {
+        for (auto x : dataString) {
+            if (x != ' ') {
+                string separateNumber(1, x);
+                initData.push_back(stoi(separateNumber));
+                counter++;
+            }
+        }
+    }
+
+    file.close();
+
+    return initData;
+}
+
+vector<vector<char>> boardInitialization(string fileName, int rowCount, int colCount) {
+    vector<vector<char>> initialCells(rowCount, vector<char>(colCount, '.'));
+    ifstream file(fileName);
+
+    // Skip the first two lines with board parameters
+    string line;
+    for (int i = 0; i < 2; i++) {
+        getline(file, line);
+    }
+
+    for (int i = 0; i < rowCount; i++) {
+        if (getline(file, line)) {
+            for (int j = 0; j < colCount; j++) {
+                if (j < line.length()) {
+                    initialCells[i][j] = line[j];
                 }
             }
         }
     }
 
-    // добавить обработку ошибки, если файл не удалось открыть
-    return initData;
+    file.close();
+    return initialCells;
 }
